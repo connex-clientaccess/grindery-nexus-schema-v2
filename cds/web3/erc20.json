@@ -1,6 +1,6 @@
 {
   "key": "erc20",
-  "name": "ERC-20 Token",
+  "name": "ERC20 Tokens on EVM Chains",
   "version": "1.0.0",
   "platformVersion": "1.0.0",
   "triggers": [
@@ -9,7 +9,10 @@
       "name": "Transfer",
       "display": {
         "label": "Transfer",
-        "description": "Transfer"
+        "description": "Transfer a specific amount of tokens",
+        "instructions": "",
+        "featured": false,
+        "hidden": false
       },
       "operation": {
         "type": "blockchain:event",
@@ -19,45 +22,73 @@
         ],
         "inputFields": [
           {
-            "key": "from",
-            "label": "From",
+            "key": "_grinderyContractAddress",
+            "label": "Token Contract Address",
             "type": "address",
-            "placeholder": "Enter a blockchain address",
-            "list": false
+            "placeholder": "",
+            "list": false,
+            "required": true,
+            "helpText": "Enter the smart contract address of the token (0x0...)",
+            "default": "",
+            "computed": false
+          },
+          {
+            "key": "from",
+            "label": "Sender",
+            "type": "address",
+            "placeholder": "0x...",
+            "list": false,
+            "helpText": "Enter sender's wallet address",
+            "default": "",
+            "required": false,
+            "computed": false
           },
           {
             "key": "to",
-            "label": "To",
+            "label": "Recipient",
             "type": "address",
-            "placeholder": "Enter a blockchain address",
-            "list": false
+            "placeholder": "0x...",
+            "list": false,
+            "helpText": "Enter recipient's wallet address",
+            "default": "",
+            "required": false,
+            "computed": false
           },
           {
             "key": "value",
-            "label": "Value",
+            "label": "Amount",
             "type": "string",
-            "placeholder": "",
-            "list": false
+            "placeholder": "Enter token amount",
+            "list": false,
+            "helpText": "",
+            "default": "",
+            "required": false,
+            "computed": true
           }
         ],
         "outputFields": [
           {
+            "key": "__transactionHash",
+            "label": "Transaction ID",
+            "type": "string"
+          },
+          {
             "key": "from",
-            "label": "From",
+            "label": "Sender",
             "type": "address",
             "placeholder": "Enter a blockchain address",
             "list": false
           },
           {
             "key": "to",
-            "label": "To",
+            "label": "Recipient",
             "type": "address",
             "placeholder": "Enter a blockchain address",
             "list": false
           },
           {
             "key": "value",
-            "label": "Value",
+            "label": "Amount",
             "type": "string",
             "placeholder": "",
             "list": false
@@ -68,9 +99,21 @@
             "type": "string",
             "placeholder": "",
             "list": false
+          },
+          {
+            "key": "_grinderyChain",
+            "label": "Chain ID (in eip155 format)",
+            "type": "string"
           }
         ],
-        "sample": {}
+        "sample": {
+          "from": "0xf02c1c8e6114b1dbe8937a39260b5b0a374432bb",
+          "to": "0xa7d9ddbe1f17865597fbd27ec712455208b6b76d",
+          "_grinderyContractAddress": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+          "value": "137",
+          "_grinderyChain": "eip155:1",
+          "__transactionHash": "0x9da1ceb2da5c334df7a746480250cc58a32ad4941887129493d3fa344d90b30e"
+        }
       }
     },
     {
@@ -78,7 +121,10 @@
       "name": "Approval",
       "display": {
         "label": "Approval",
-        "description": "Approval"
+        "description": "Approve a specific amount of tokens",
+        "instructions": "",
+        "featured": false,
+        "hidden": true
       },
       "operation": {
         "type": "blockchain:event",
@@ -86,27 +132,44 @@
         "inputFields": [
           {
             "key": "owner",
-            "label": "Owner",
+            "label": "Owner's Address",
             "type": "address",
-            "placeholder": "Enter a blockchain address",
-            "list": false
+            "placeholder": "0x...",
+            "list": false,
+            "helpText": "Enter owner's wallet address",
+            "default": "",
+            "required": false,
+            "computed": false
           },
           {
             "key": "spender",
-            "label": "Spender",
+            "label": "Spender's Address",
             "type": "address",
-            "placeholder": "Enter a blockchain address",
-            "list": false
+            "placeholder": "0x...",
+            "list": false,
+            "helpText": "Enter spender's wallet address",
+            "default": "",
+            "required": false,
+            "computed": false
           },
           {
             "key": "value",
-            "label": "Value",
+            "label": "Amount",
             "type": "string",
-            "placeholder": "",
-            "list": false
+            "placeholder": "Enter amount of tokens",
+            "list": false,
+            "helpText": "",
+            "default": "",
+            "required": false,
+            "computed": false
           }
         ],
         "outputFields": [
+          {
+            "key": "__transactionHash",
+            "label": "Transaction hash",
+            "type": "string"
+          },
           {
             "key": "owner",
             "label": "Owner",
@@ -123,44 +186,45 @@
           },
           {
             "key": "value",
-            "label": "Value",
+            "label": "Amount",
             "type": "string",
             "placeholder": "",
             "list": false
+          },
+          {
+            "key": "_grinderyContractAddress",
+            "label": "Contract address",
+            "type": "string",
+            "placeholder": "",
+            "list": false
+          },
+          {
+            "key": "_grinderyChain",
+            "label": "Chain ID (in eip155 format)",
+            "type": "string"
           }
         ],
-        "sample": {}
+        "sample": {
+          "owner": "0xa7d9ddbe1f17865597fbd27ec712455208b6b76d",
+          "spender": "0xf02c1c8e6114b1dbe8937a39260b5b0a374432bb",
+          "value": "374",
+          "_grinderyContractAddress": "0x6f53bF7fB8C8F6f7ccc1719b72E7b9Be57b6B7E6",
+          "_grinderyChain": "eip155:1",
+          "__transactionHash": "0x9da1ceb2da5c334df7a746480250cc58a32ad4941887129493d3fa344d90b30e"
+        }
       }
     }
   ],
   "actions": [
     {
-      "key": "nameAction",
-      "name": "Name (View function)",
-      "display": {
-        "label": "Name (View function)",
-        "description": "Name (View function)"
-      },
-      "operation": {
-        "type": "blockchain:call",
-        "signature": "function name() view returns string",
-        "inputFields": [],
-        "outputFields": [
-          {
-            "key": "returnValue",
-            "label": "Return value of Name",
-            "type": "string"
-          }
-        ],
-        "sample": {}
-      }
-    },
-    {
       "key": "approveAction",
       "name": "Approve",
       "display": {
         "label": "Approve",
-        "description": "Approve"
+        "description": "Approve a specific amount of tokens",
+        "instructions": "",
+        "featured": false,
+        "hidden": true
       },
       "operation": {
         "type": "blockchain:call",
@@ -168,19 +232,25 @@
         "inputFields": [
           {
             "key": "_spender",
-            "label": "Spender",
+            "label": "Spender's Address",
             "type": "address",
-            "placeholder": "Enter a blockchain address",
+            "placeholder": "0x...",
             "list": false,
-            "required": true
+            "required": true,
+            "helpText": "Enter spender's wallet address",
+            "default": "",
+            "computed": false
           },
           {
             "key": "_value",
-            "label": "Value",
+            "label": "Amount",
             "type": "string",
-            "placeholder": "",
+            "placeholder": "Enter token amount",
             "list": false,
-            "required": true
+            "required": true,
+            "helpText": "",
+            "default": "",
+            "computed": false
           }
         ],
         "outputFields": [],
@@ -189,14 +259,17 @@
     },
     {
       "key": "totalSupplyAction",
-      "name": "Total Supply (View function)",
+      "name": "Total Supply",
       "display": {
-        "label": "Total Supply (View function)",
-        "description": "Total Supply (View function)"
+        "label": "Total Supply",
+        "description": "View the total token supply",
+        "instructions": "",
+        "featured": false,
+        "hidden": false
       },
       "operation": {
         "type": "blockchain:call",
-        "signature": "function totalSupply() view returns uint256",
+        "signature": "function totalSupply() view returns (uint256)",
         "inputFields": [],
         "outputFields": [
           {
@@ -205,7 +278,9 @@
             "type": "string"
           }
         ],
-        "sample": {}
+        "sample": {
+          "returnValue": "9496348"
+        }
       }
     },
     {
@@ -213,7 +288,10 @@
       "name": "Transfer From",
       "display": {
         "label": "Transfer From",
-        "description": "Transfer From"
+        "description": "Token transfer from a specific sender to a recipient",
+        "instructions": "",
+        "featured": false,
+        "hidden": true
       },
       "operation": {
         "type": "blockchain:call",
@@ -221,58 +299,46 @@
         "inputFields": [
           {
             "key": "_from",
-            "label": "From",
+            "label": "Sender",
             "type": "address",
-            "placeholder": "Enter a blockchain address",
+            "placeholder": "0x...",
             "list": false,
-            "required": true
+            "required": true,
+            "helpText": "Enter sender's wallet address",
+            "default": "",
+            "computed": false
           },
           {
             "key": "_to",
-            "label": "To",
+            "label": "Recipient",
             "type": "address",
-            "placeholder": "Enter a blockchain address",
+            "placeholder": "0x...",
             "list": false,
-            "required": true
+            "required": true,
+            "helpText": "Enter recipient's wallet address",
+            "default": "",
+            "computed": false
           },
           {
             "key": "_value",
-            "label": "Transfer amount",
+            "label": "Amount",
             "type": "string",
-            "placeholder": "",
+            "placeholder": "Enter token amount",
             "list": false,
-            "required": true
+            "required": true,
+            "helpText": "",
+            "default": "",
+            "computed": false
           },
           {
             "key": "_grinderyUnitConversion__value",
             "type": "string",
-            "default": "ether->wei",
+            "default": "erc20Decimals[@]",
             "list": false,
             "computed": true
           }
         ],
         "outputFields": [],
-        "sample": {}
-      }
-    },
-    {
-      "key": "decimalsAction",
-      "name": "Decimals (View function)",
-      "display": {
-        "label": "Decimals (View function)",
-        "description": "Decimals (View function)"
-      },
-      "operation": {
-        "type": "blockchain:call",
-        "signature": "function decimals() view returns uint8",
-        "inputFields": [],
-        "outputFields": [
-          {
-            "key": "returnValue",
-            "label": "Return value of Decimals",
-            "type": "number"
-          }
-        ],
         "sample": {}
       }
     },
@@ -281,7 +347,10 @@
       "name": "Decrease Approval",
       "display": {
         "label": "Decrease Approval",
-        "description": "Decrease Approval"
+        "description": "Approve the reduction of a specific amount of tokens",
+        "instructions": "",
+        "featured": false,
+        "hidden": true
       },
       "operation": {
         "type": "blockchain:call",
@@ -289,24 +358,30 @@
         "inputFields": [
           {
             "key": "_spender",
-            "label": "Spender",
+            "label": "Spender's Address",
             "type": "address",
-            "placeholder": "Enter a blockchain address",
+            "placeholder": "0x...",
             "list": false,
-            "required": true
+            "required": true,
+            "helpText": "Enter spender's wallet address",
+            "default": "",
+            "computed": false
           },
           {
             "key": "_subtractedValue",
-            "label": "Subtracted Value",
+            "label": "Amount",
             "type": "string",
-            "placeholder": "",
+            "placeholder": "Enter token amount",
             "list": false,
-            "required": true
+            "required": true,
+            "helpText": "Specify the amount of tokens to subtract",
+            "default": "",
+            "computed": false
           },
           {
             "key": "_grinderyUnitConversion__subtractedValue",
             "type": "string",
-            "default": "ether->wei",
+            "default": "erc20Decimals[@]",
             "list": false,
             "computed": true
           }
@@ -316,54 +391,42 @@
       }
     },
     {
-      "key": "balanceOfAction",
-      "name": "Balance Of (View function)",
+      "key": "balanceOfActionERC20",
+      "name": "Balance Of",
       "display": {
-        "label": "Balance Of (View function)",
-        "description": "Balance Of (View function)"
+        "label": "Balance Of",
+        "description": "Get owner's token balance",
+        "instructions": "",
+        "featured": false,
+        "hidden": false
       },
       "operation": {
         "type": "blockchain:call",
-        "signature": "function balanceOf(address _owner) view returns uint256",
+        "signature": "getBalanceERC20Token",
         "inputFields": [
           {
-            "key": "_owner",
-            "label": "Owner",
+            "key": "address",
+            "label": "Holder's Address",
             "type": "address",
-            "placeholder": "Enter a blockchain address",
+            "placeholder": "0x...",
             "list": false,
-            "required": true
+            "required": true,
+            "helpText": "Enter the token holder's address",
+            "default": "",
+            "computed": false
           }
         ],
         "outputFields": [
           {
-            "key": "returnValue",
-            "label": "Return value of Balance Of",
+            "key": "balance",
+            "label": "Balance",
             "type": "string"
           }
         ],
-        "sample": {}
-      }
-    },
-    {
-      "key": "symbolAction",
-      "name": "Symbol (View function)",
-      "display": {
-        "label": "Symbol (View function)",
-        "description": "Symbol (View function)"
-      },
-      "operation": {
-        "type": "blockchain:call",
-        "signature": "function symbol() view returns string",
-        "inputFields": [],
-        "outputFields": [
-          {
-            "key": "returnValue",
-            "label": "Return value of Symbol",
-            "type": "string"
-          }
-        ],
-        "sample": {}
+        "sample": {
+          "returnValue": "741",
+          "balance": "10000"
+        }
       }
     },
     {
@@ -371,7 +434,10 @@
       "name": "Transfer",
       "display": {
         "label": "Transfer",
-        "description": "Transfer"
+        "description": "Transfer a specific amount of tokens",
+        "instructions": "",
+        "featured": false,
+        "hidden": true
       },
       "operation": {
         "type": "blockchain:call",
@@ -379,24 +445,30 @@
         "inputFields": [
           {
             "key": "_to",
-            "label": "To",
+            "label": "Recipient",
             "type": "address",
-            "placeholder": "Enter a blockchain address",
+            "placeholder": "0x...",
             "list": false,
-            "required": true
+            "required": true,
+            "helpText": "Enter recipient's wallet address",
+            "default": "",
+            "computed": false
           },
           {
             "key": "_value",
-            "label": "Transfer amount",
+            "label": "Amount",
             "type": "string",
-            "placeholder": "",
+            "placeholder": "Enter token amount",
             "list": false,
-            "required": true
+            "required": true,
+            "helpText": "Enter the amount you want to transfer",
+            "default": "",
+            "computed": false
           },
           {
             "key": "_grinderyUnitConversion__value",
             "type": "string",
-            "default": "ether->wei",
+            "default": "erc20Decimals[@]",
             "list": false,
             "computed": true
           }
@@ -410,7 +482,10 @@
       "name": "Increase Approval",
       "display": {
         "label": "Increase Approval",
-        "description": "Increase Approval"
+        "description": "Approve the increment of a specific amount of tokens",
+        "instructions": "",
+        "featured": false,
+        "hidden": true
       },
       "operation": {
         "type": "blockchain:call",
@@ -418,24 +493,30 @@
         "inputFields": [
           {
             "key": "_spender",
-            "label": "Spender",
+            "label": "Spender's Address",
             "type": "address",
-            "placeholder": "Enter a blockchain address",
+            "placeholder": "0x...",
             "list": false,
-            "required": true
+            "required": true,
+            "helpText": "Enter spender's wallet address",
+            "default": "",
+            "computed": false
           },
           {
             "key": "_addedValue",
-            "label": "Added Value",
+            "label": "Amount",
             "type": "string",
-            "placeholder": "",
+            "placeholder": "Enter token amount",
             "list": false,
-            "required": true
+            "required": true,
+            "helpText": "Specify the amount of tokens to add",
+            "default": "",
+            "computed": false
           },
           {
             "key": "_grinderyUnitConversion__addedValue",
             "type": "string",
-            "default": "ether->wei",
+            "default": "erc20Decimals[@]",
             "list": false,
             "computed": true
           }
@@ -446,42 +527,117 @@
     },
     {
       "key": "allowanceAction",
-      "name": "Allowance (View function)",
+      "name": "Allowance",
       "display": {
-        "label": "Allowance (View function)",
-        "description": "Allowance (View function)"
+        "label": "Allowance",
+        "description": "View the amount of tokens approved for a spender by a specific owner",
+        "instructions": "",
+        "featured": false,
+        "hidden": true
       },
       "operation": {
         "type": "blockchain:call",
-        "signature": "function allowance(address _owner, address _spender) view returns uint256",
+        "signature": "getAllowanceERC20Token",
         "inputFields": [
           {
-            "key": "_owner",
-            "label": "Owner",
+            "key": "_grinderyContractAddress",
+            "label": "Token contract address",
             "type": "address",
-            "placeholder": "Enter a blockchain address",
+            "placeholder": "Enter a token contract address",
             "list": false,
-            "required": true
+            "required": true,
+            "helpText": "Enter a token contract address",
+            "default": "",
+            "computed": false
           },
           {
-            "key": "_spender",
-            "label": "Spender",
+            "key": "spender",
+            "label": "Spender's Address",
             "type": "address",
-            "placeholder": "Enter a blockchain address",
+            "placeholder": "0x...",
             "list": false,
-            "required": true
+            "required": true,
+            "helpText": "Enter spender's wallet address",
+            "default": "",
+            "computed": false
+          },
+          {
+            "key": "owner",
+            "label": "Owner",
+            "helpText": "",
+            "default": "",
+            "required": true,
+            "computed": false,
+            "type": "string",
+            "placeholder": "Enter owner's blockchain address"
           }
         ],
         "outputFields": [
           {
-            "key": "returnValue",
+            "key": "allowance",
             "label": "Return value of Allowance",
             "type": "string"
           }
         ],
-        "sample": {}
+        "sample": {
+          "returnValue": "458"
+        }
+      }
+    },
+    {
+      "key": "InformationERC20TokenAction",
+      "name": "Token Information",
+      "display": {
+        "label": "Token Information",
+        "description": "Get details of an ERC20 token",
+        "instructions": "",
+        "featured": false,
+        "hidden": false
+      },
+      "operation": {
+        "inputFields": [
+          {
+            "key": "_grinderyContractAddress",
+            "label": "Token Contract Address",
+            "helpText": "Enter a token contract address",
+            "default": "",
+            "required": true,
+            "computed": false,
+            "type": "evmAddress",
+            "placeholder": "0x..."
+          }
+        ],
+        "type": "blockchain:call",
+        "signature": "getInformationERC20Token",
+        "outputFields": [
+          {
+            "key": "symbol",
+            "label": "Symbol",
+            "type": "string"
+          },
+          {
+            "key": "decimals",
+            "label": "Decimals",
+            "type": "string"
+          },
+          {
+            "key": "name",
+            "label": "Name",
+            "type": "string"
+          }
+        ],
+        "sample": {
+          "symbol": "ETH",
+          "decimals": "10",
+          "name": "ETH token"
+        }
       }
     }
   ],
-  "icon": "data:image/png;base64,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"
+  "icon": "data:image/png;base64,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",
+  "type": "web3",
+  "access": "Public",
+  "user": "eip155:1:0x4245cd11b5a9E54F57bE19B643E564AA4Ee86D1b",
+  "workspace": "ws-499e41a8-c813-4d6a-aaa8-4ecf686e5e9d",
+  "description": ""
 }
